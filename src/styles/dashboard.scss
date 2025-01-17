@@ -1,0 +1,32 @@
+@import "dashboard/master";
+@import "dashboard/topbar";
+@import "dashboard/navbar";
+body{
+  background: #F2F2F7;
+}
+body{
+  min-height: 100vh;
+}
+.fs-14{
+  font-size: 14px;
+}
+.suspenseLoading{
+  font-size: 64px;
+}
+.mw-78{
+  @media (max-width: 1199px) {
+    max-width: 78%;
+  }
+}
+
+.main-wrap{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+main{
+  max-width: calc(100% - 272px);
+  width: 100%;
+}

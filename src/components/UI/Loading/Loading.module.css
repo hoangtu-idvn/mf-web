@@ -1,0 +1,72 @@
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.fullScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--background);
+  min-height: 100vh;
+  z-index: 1000;
+}
+
+.spinner {
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.small .spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--border-color);
+  border-top: 3px solid var(--primary-color);
+}
+
+.medium .spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border-color);
+  border-top: 4px solid var(--primary-color);
+}
+
+.large .spinner {
+  width: 64px;
+  height: 64px;
+  border: 5px solid var(--border-color);
+  border-top: 5px solid var(--primary-color);
+}
+
+.message {
+  color: var(--text-color);
+  font-size: 1rem;
+  margin: 0;
+  text-align: center;
+}
+
+.progressBar {
+  height: 4px;
+  background-color: var(--primary-color);
+  transition: width 0.4s ease;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,186 @@
+// Thanh loading chính
+.loading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--loading-height, 3px);
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  overflow: hidden;
+}
+
+// Thanh gradient animation
+.loading-progress-bar {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    var(--loading-start-color, #00FF88), 
+    var(--loading-end-color, #344FFB)
+  );
+  transform-origin: 0% 50%;
+
+  // Animation khi đang loading
+  &:not(.completing) {
+    // Thanh loading thứ nhất
+    &::before {
+      content: '';
+      position: absolute;
+      background: inherit;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      will-change: left, right;
+      animation: indeterminate var(--loading-animation-duration, 1500ms) cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+    }
+
+    // Thanh loading thứ hai (chạy sau)
+    &::after {
+      content: '';
+      position: absolute;
+      background: inherit;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      will-change: left, right;
+      animation: indeterminate-short var(--loading-animation-duration, 1500ms) cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+      animation-delay: var(--loading-animation-delay, 750ms);
+    }
+  }
+
+  // Animation khi hoàn thành
+  &.completing {
+    animation: complete var(--loading-completion-time, 500ms) ease-out forwards;
+  }
+}
+
+// Animation cho thanh loading thứ nhất
+@keyframes indeterminate {
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+  45% {
+    left: 30%;
+    right: 10%;
+  }
+  100% {
+    left: 100%;
+    right: -35%;
+  }
+}
+
+// Animation cho thanh loading thứ hai
+@keyframes indeterminate-short {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+  45% {
+    left: 40%;
+    right: 20%;
+  }
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+}
+
+// Animation hoàn thành
+@keyframes complete {
+  0% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+
+// Loading overlay
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+// Loading spinner container
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.3s ease-out;
+  
+  .spinner-border {
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    border-width: 0.25rem;
+    animation: spin 0.8s linear infinite;
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Size variants
+.spinner-border-sm {
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+}
+
+.spinner-border-lg {
+  width: 4rem !important;
+  height: 4rem !important;
+}
+
+// Regular spinner (non-fullscreen)
+.spinner-border {
+  display: block;
+  margin: 0 auto;
+}
